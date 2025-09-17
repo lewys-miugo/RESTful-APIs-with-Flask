@@ -1,29 +1,31 @@
-1. Create and enter the directory
+# Step by Step process of building this app from scratch.
+
+## 1. Create and enter the directory
 ```bash
 mkdir course_api_flask
 cd courses_api_flask
 ```
-2. Create and activate virtual environment
+## 2. Create and activate virtual environment
 ```bash
 python3 -m venv venv
 source venv/bin/activate
 ```
-3. Install flask and its dependencies
+## 3. Install flask and its dependencies
 ```bash
 pip install flask flask_sqlalchemy flask_migrate
 ```
-4. Freeze rquirements
+## 4. Freeze rquirements
 ```bash
 pip freeze > requirements.txt
 ```
-5. Make the necessary directories
+## 5. Make the necessary directories
 ```bash
 mkdir server
 mkdir server/models server/routes
 touch server/__init__.py server/app.py server/models/__init__.py server/routes/__init__.py
 touch server/models/course.py server/routes/course_routes.py
 ```
-6. Fill in the above files with initial data:
+## 6. Fill in the above files with initial data:
 `server/app.py` :
 ```python
 # server/app.py
@@ -53,17 +55,17 @@ from flask_sqlalchemy import SQLAlchemy
 db = SQLAlchemy()
 ```
 
-7. Re-export the FLASK_APP variable
+## 7. Re-export the FLASK_APP variable
 ```bash
 export FLASK_APP=server.app:create_app
 ```
 
-8. Now try running flask
+## 8. Now try running flask
 ```bash
 flask run
 ```
 
-9. Initialize Flask-Migrate
+## 9. Initialize Flask-Migrate
 
 Once Flask runs without errors, stop the server (CTRL+C) and run:
 ```bash
@@ -72,7 +74,7 @@ flask db migrate -m "Initial migration"
 flask db upgrade head
 ```
 
-10. We now add SerializerMixin and Course model
+## 10. We now add SerializerMixin and Course model
 
 Edit `server/models/__init__.py` to include a simple serializer mixin and to make sure Course will be imported later:
 
@@ -106,7 +108,7 @@ class Course(db.Model, SerializerMixin):
     def __repr__(self):
         return f"<Course id={self.id} name={self.name!r}>"
 ```
-11. We now Generate and Apply Migration
+## 11. We now Generate and Apply Migration
 
 ```bash
 flask db migrate -m "Create courses table"
@@ -114,7 +116,7 @@ flask db upgrade
 ```
 You should now have a courses table in app.db
 
-12. Now lets create RESTful Routes
+## 12. Now lets create RESTful Routes
 Edit `server/routes/course_routes.py`:
 
 ```python
@@ -194,7 +196,7 @@ def delete_course(id):
     return jsonify({"message": "course deleted"}), 200
 ```
 
-13. We register Blueprint
+## 13. We register Blueprint
 edit `server/app.py` to register the `courses_bp`
 ```python
 # server/app.py
@@ -220,12 +222,12 @@ def create_app():
     return app
 ```
 
-14. We can no run the app
+## 14. We can no run the app
 ```bash
 flask run
 ```
 
-15. TEsting the endpoints
+## 15. TEsting the endpoints
 we will use `curl` open a new terminal tab:
 `CREATE` To add a course use`POST`:
 ```bash
