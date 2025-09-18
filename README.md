@@ -250,3 +250,19 @@ curl -X PUT http://127.0.0.1:5000/courses/1 \
 ```bash
 curl -X DELETE http://127.0.0.1:5000/courses/1
 ```
+
+# Adding React APP Front end 
+Now we add react.
+ensure you are on the root directory `./../courses_api_flask`
+```bash
+npm create vite@latest
+```
+proceed to write `project-name`, framework selection `React` select variant `JavaScript`.
+
+Once done run:
+```bash
+cd project-name
+  npm install
+  npm run build
+  npm run dev
+```
